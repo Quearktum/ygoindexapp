@@ -15,7 +15,8 @@
         android:paddingTop="8dp"
         android:textSize="20sp"
         android:textColor="@color/black"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:text="Yu-Gi-Oh! Index App"/>
 
     <View
         android:layout_width="match_parent"

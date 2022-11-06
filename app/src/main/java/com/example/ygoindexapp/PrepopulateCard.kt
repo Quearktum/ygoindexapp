@@ -18,10 +18,11 @@ class PrepopulateCard(private val context: Context) : RoomDatabase.Callback() {
     override fun onCreate(db: SupportSQLiteDatabase) {
         super.onCreate(db)
         CoroutineScope(Dispatchers.IO).launch {
-            fillWithStartingNotes(context)
+            fillWithStartingCards(context)
         }
     }
 
+    //loading data from a JSON file
     fun loadJSONArray(context: Context): JSONArray? {
 
         val inputStream = context.resources.openRawResource(R.raw.cardinfoprepopulate)
@@ -31,7 +32,8 @@ class PrepopulateCard(private val context: Context) : RoomDatabase.Callback() {
         }
     }
 
-    suspend fun fillWithStartingNotes(context: Context) {
+    //Prepopulate the database
+    suspend fun fillWithStartingCards(context: Context) {
 
         val dao = CardDatabase.getInstance(context)?.dao
 

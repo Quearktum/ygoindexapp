@@ -25,8 +25,8 @@ class CardsAdapter(private val listener: (Card) -> Unit) : RecyclerView.Adapter<
         holder.binding.tvName.text = oldData[position].cardName
         holder.binding.tvRace.text = oldData[position].cardRace
 
+        //click listener for card
         holder.binding.cvCard.setOnClickListener{
-            Log.i(null, "${oldData[position].cardName} clicked")
             listener(oldData[position])
         }
     }
@@ -35,6 +35,7 @@ class CardsAdapter(private val listener: (Card) -> Unit) : RecyclerView.Adapter<
         return oldData.size
     }
 
+    //set a new instance of data
     fun setData(newData: List<Card>){
         oldData = newData
         notifyDataSetChanged()

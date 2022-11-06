@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 import kotlinx.coroutines.flow.Flow
 
+
 @Parcelize
 @Entity(tableName = "Cards_table")
 data class Card(

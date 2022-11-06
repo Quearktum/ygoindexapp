@@ -1,5 +1,6 @@
 package com.example.ygoindexapp
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -33,15 +34,18 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        drawerLayout= binding.lDrawer
+        //drawer layout initiate
+        drawerLayout = binding.lDrawer
         val navView: NavigationView = binding.nvNavView
 
-        toggle = ActionBarDrawerToggle(this, drawerLayout,R.string.open, R.string.close)
+        //toggle open, close for drawer
+        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        //initiate database
         val cardDb = CardDatabase.getInstance(this)
         val myViewModelFactory = ViewModelFactory(cardDb!!)
 
@@ -50,20 +54,22 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
+        //the viewModel observes the change in the adapter when it trigger the setData function
         viewModel.cards.observe(this) {
             adapter.setData(it)
         }
 
+        //button functionality for drawer navigation
         navView.setNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.nav_Cards -> Toast.makeText(applicationContext,"Clicked Cards",Toast.LENGTH_SHORT).show()
-                R.id.nav_Decks -> Toast.makeText(applicationContext,"Clicked Decks",Toast.LENGTH_SHORT).show()
+            when (it.itemId) {
+                R.id.nav_Add -> switchActitvity(AddActivity())
             }
             true
 
         }
     }
 
+    //DetailedActivity is triggered when one of the card is clicked
     private fun OnCardSelect(card: Card) {
         val intent = Intent(this, DetailedActivity::class.java)
         intent.putExtra("card", card)
@@ -71,6 +77,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         startActivity(intent)
     }
 
+    //Search menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.search_menu, menu)
 
@@ -94,6 +101,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         return true
     }
 
+    //search function for search menu
     private fun searchDb(query: String) {
         val searchQuery = "%$query%"
 
@@ -105,15 +113,14 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (toggle.onOptionsItemSelected(item)){
+        if (toggle.onOptionsItemSelected(item)) {
             return true
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun replceFragment(fragment: Fragment, title:String){
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.)
+    private fun switchActitvity(activity: Activity) {
+        val intent = Intent(this, activity::class.java)
+        startActivity(intent)
     }
 }

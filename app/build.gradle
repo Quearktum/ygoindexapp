@@ -7,6 +7,7 @@ plugins {
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     namespace 'com.example.ygoindexapp'
@@ -58,6 +59,10 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
     kapt "androidx.lifecycle:lifecycle-compiler:2.4.1"
+
+    // Navigation Component
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
 
     //Room Database
     implementation "androidx.room:room-runtime:2.5.0-alpha02"

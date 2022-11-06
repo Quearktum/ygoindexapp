@@ -3,11 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="@layout/nav_header">
-    <item
-        android:id="@+id/nav_Cards"
-        android:title="Cards"/>
 
     <item
-        android:id="@+id/nav_Decks"
-        android:title="Decks"/>
+        android:id="@+id/nav_Add"
+        android:icon="@drawable/ic_add"
+        android:title="Add Card"
+        />
 </menu>

@@ -18,6 +18,19 @@ class MainViewModel constructor(private val cardDb: CardDatabase) : ViewModel() 
         }
     }
 
+    fun updateCard(card: Card){
+        viewModelScope.launch {
+            cardDb.dao.updateCard(card)
+        }
+    }
+
+    fun deleteCard(card:Card){
+        viewModelScope.launch {
+            cardDb.dao.deleteCard(card)
+        }
+    }
+
+
     fun searchCardByName(searchQuery: String):LiveData<List<Card>>{
         return cardDb.dao.searchCardsByName(searchQuery).asLiveData()
     }
